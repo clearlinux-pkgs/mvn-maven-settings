@@ -4,7 +4,7 @@
 #
 Name     : mvn-maven-settings
 Version  : 2.0.6
-Release  : 6
+Release  : 7
 URL      : https://repo1.maven.org/maven2/org/apache/maven/maven-settings/2.0.6/maven-settings-2.0.6.jar
 Source0  : https://repo1.maven.org/maven2/org/apache/maven/maven-settings/2.0.6/maven-settings-2.0.6.jar
 Source1  : https://repo1.maven.org/maven2/org/apache/maven/maven-settings/2.0.10/maven-settings-2.0.10.jar
@@ -24,18 +24,21 @@ Source14  : https://repo1.maven.org/maven2/org/apache/maven/maven-settings/2.2.0
 Source15  : https://repo1.maven.org/maven2/org/apache/maven/maven-settings/2.2.0/maven-settings-2.2.0.pom
 Source16  : https://repo1.maven.org/maven2/org/apache/maven/maven-settings/2.2.1/maven-settings-2.2.1.jar
 Source17  : https://repo1.maven.org/maven2/org/apache/maven/maven-settings/2.2.1/maven-settings-2.2.1.pom
-Source18  : https://repo1.maven.org/maven2/org/apache/maven/maven-settings/3.0.5/maven-settings-3.0.5.jar
-Source19  : https://repo1.maven.org/maven2/org/apache/maven/maven-settings/3.0.5/maven-settings-3.0.5.pom
-Source20  : https://repo1.maven.org/maven2/org/apache/maven/maven-settings/3.0/maven-settings-3.0.jar
-Source21  : https://repo1.maven.org/maven2/org/apache/maven/maven-settings/3.0/maven-settings-3.0.pom
-Source22  : https://repo1.maven.org/maven2/org/apache/maven/maven-settings/3.3.9/maven-settings-3.3.9.jar
-Source23  : https://repo1.maven.org/maven2/org/apache/maven/maven-settings/3.3.9/maven-settings-3.3.9.pom
-Source24  : https://repo1.maven.org/maven2/org/apache/maven/maven-settings/3.6.0/maven-settings-3.6.0.jar
-Source25  : https://repo1.maven.org/maven2/org/apache/maven/maven-settings/3.6.0/maven-settings-3.6.0.pom
+Source18  : https://repo1.maven.org/maven2/org/apache/maven/maven-settings/3.0.4/maven-settings-3.0.4.jar
+Source19  : https://repo1.maven.org/maven2/org/apache/maven/maven-settings/3.0.4/maven-settings-3.0.4.pom
+Source20  : https://repo1.maven.org/maven2/org/apache/maven/maven-settings/3.0.5/maven-settings-3.0.5.jar
+Source21  : https://repo1.maven.org/maven2/org/apache/maven/maven-settings/3.0.5/maven-settings-3.0.5.pom
+Source22  : https://repo1.maven.org/maven2/org/apache/maven/maven-settings/3.0/maven-settings-3.0.jar
+Source23  : https://repo1.maven.org/maven2/org/apache/maven/maven-settings/3.0/maven-settings-3.0.pom
+Source24  : https://repo1.maven.org/maven2/org/apache/maven/maven-settings/3.3.9/maven-settings-3.3.9.jar
+Source25  : https://repo1.maven.org/maven2/org/apache/maven/maven-settings/3.3.9/maven-settings-3.3.9.pom
+Source26  : https://repo1.maven.org/maven2/org/apache/maven/maven-settings/3.6.0/maven-settings-3.6.0.jar
+Source27  : https://repo1.maven.org/maven2/org/apache/maven/maven-settings/3.6.0/maven-settings-3.6.0.pom
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : Apache-2.0
 Requires: mvn-maven-settings-data = %{version}-%{release}
+Requires: mvn-maven-settings-license = %{version}-%{release}
 
 %description
 No detailed description available
@@ -48,11 +51,22 @@ Group: Data
 data components for the mvn-maven-settings package.
 
 
+%package license
+Summary: license components for the mvn-maven-settings package.
+Group: Default
+
+%description license
+license components for the mvn-maven-settings package.
+
+
 %prep
+%setup -q -n META-INF
 
 %build
 
 %install
+mkdir -p %{buildroot}/usr/share/package-licenses/mvn-maven-settings
+cp LICENSE.txt %{buildroot}/usr/share/package-licenses/mvn-maven-settings/LICENSE.txt
 mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/apache/maven/maven-settings/2.0.6
 cp %{SOURCE0} %{buildroot}/usr/share/java/.m2/repository/org/apache/maven/maven-settings/2.0.6/maven-settings-2.0.6.jar
 
@@ -107,29 +121,35 @@ cp %{SOURCE16} %{buildroot}/usr/share/java/.m2/repository/org/apache/maven/maven
 mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/apache/maven/maven-settings/2.2.1
 cp %{SOURCE17} %{buildroot}/usr/share/java/.m2/repository/org/apache/maven/maven-settings/2.2.1/maven-settings-2.2.1.pom
 
-mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/apache/maven/maven-settings/3.0.5
-cp %{SOURCE18} %{buildroot}/usr/share/java/.m2/repository/org/apache/maven/maven-settings/3.0.5/maven-settings-3.0.5.jar
+mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/apache/maven/maven-settings/3.0.4
+cp %{SOURCE18} %{buildroot}/usr/share/java/.m2/repository/org/apache/maven/maven-settings/3.0.4/maven-settings-3.0.4.jar
+
+mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/apache/maven/maven-settings/3.0.4
+cp %{SOURCE19} %{buildroot}/usr/share/java/.m2/repository/org/apache/maven/maven-settings/3.0.4/maven-settings-3.0.4.pom
 
 mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/apache/maven/maven-settings/3.0.5
-cp %{SOURCE19} %{buildroot}/usr/share/java/.m2/repository/org/apache/maven/maven-settings/3.0.5/maven-settings-3.0.5.pom
+cp %{SOURCE20} %{buildroot}/usr/share/java/.m2/repository/org/apache/maven/maven-settings/3.0.5/maven-settings-3.0.5.jar
+
+mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/apache/maven/maven-settings/3.0.5
+cp %{SOURCE21} %{buildroot}/usr/share/java/.m2/repository/org/apache/maven/maven-settings/3.0.5/maven-settings-3.0.5.pom
 
 mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/apache/maven/maven-settings/3.0
-cp %{SOURCE20} %{buildroot}/usr/share/java/.m2/repository/org/apache/maven/maven-settings/3.0/maven-settings-3.0.jar
+cp %{SOURCE22} %{buildroot}/usr/share/java/.m2/repository/org/apache/maven/maven-settings/3.0/maven-settings-3.0.jar
 
 mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/apache/maven/maven-settings/3.0
-cp %{SOURCE21} %{buildroot}/usr/share/java/.m2/repository/org/apache/maven/maven-settings/3.0/maven-settings-3.0.pom
+cp %{SOURCE23} %{buildroot}/usr/share/java/.m2/repository/org/apache/maven/maven-settings/3.0/maven-settings-3.0.pom
 
 mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/apache/maven/maven-settings/3.3.9
-cp %{SOURCE22} %{buildroot}/usr/share/java/.m2/repository/org/apache/maven/maven-settings/3.3.9/maven-settings-3.3.9.jar
+cp %{SOURCE24} %{buildroot}/usr/share/java/.m2/repository/org/apache/maven/maven-settings/3.3.9/maven-settings-3.3.9.jar
 
 mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/apache/maven/maven-settings/3.3.9
-cp %{SOURCE23} %{buildroot}/usr/share/java/.m2/repository/org/apache/maven/maven-settings/3.3.9/maven-settings-3.3.9.pom
+cp %{SOURCE25} %{buildroot}/usr/share/java/.m2/repository/org/apache/maven/maven-settings/3.3.9/maven-settings-3.3.9.pom
 
 mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/apache/maven/maven-settings/3.6.0
-cp %{SOURCE24} %{buildroot}/usr/share/java/.m2/repository/org/apache/maven/maven-settings/3.6.0/maven-settings-3.6.0.jar
+cp %{SOURCE26} %{buildroot}/usr/share/java/.m2/repository/org/apache/maven/maven-settings/3.6.0/maven-settings-3.6.0.jar
 
 mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/apache/maven/maven-settings/3.6.0
-cp %{SOURCE25} %{buildroot}/usr/share/java/.m2/repository/org/apache/maven/maven-settings/3.6.0/maven-settings-3.6.0.pom
+cp %{SOURCE27} %{buildroot}/usr/share/java/.m2/repository/org/apache/maven/maven-settings/3.6.0/maven-settings-3.6.0.pom
 
 
 %files
@@ -155,6 +175,8 @@ cp %{SOURCE25} %{buildroot}/usr/share/java/.m2/repository/org/apache/maven/maven
 /usr/share/java/.m2/repository/org/apache/maven/maven-settings/2.2.0/maven-settings-2.2.0.pom
 /usr/share/java/.m2/repository/org/apache/maven/maven-settings/2.2.1/maven-settings-2.2.1.jar
 /usr/share/java/.m2/repository/org/apache/maven/maven-settings/2.2.1/maven-settings-2.2.1.pom
+/usr/share/java/.m2/repository/org/apache/maven/maven-settings/3.0.4/maven-settings-3.0.4.jar
+/usr/share/java/.m2/repository/org/apache/maven/maven-settings/3.0.4/maven-settings-3.0.4.pom
 /usr/share/java/.m2/repository/org/apache/maven/maven-settings/3.0.5/maven-settings-3.0.5.jar
 /usr/share/java/.m2/repository/org/apache/maven/maven-settings/3.0.5/maven-settings-3.0.5.pom
 /usr/share/java/.m2/repository/org/apache/maven/maven-settings/3.0/maven-settings-3.0.jar
@@ -163,3 +185,7 @@ cp %{SOURCE25} %{buildroot}/usr/share/java/.m2/repository/org/apache/maven/maven
 /usr/share/java/.m2/repository/org/apache/maven/maven-settings/3.3.9/maven-settings-3.3.9.pom
 /usr/share/java/.m2/repository/org/apache/maven/maven-settings/3.6.0/maven-settings-3.6.0.jar
 /usr/share/java/.m2/repository/org/apache/maven/maven-settings/3.6.0/maven-settings-3.6.0.pom
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/mvn-maven-settings/LICENSE.txt
